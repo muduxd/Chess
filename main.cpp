@@ -11,7 +11,6 @@
 
 void RenderBoard(char boardState[8][8], SDL_Window *window, SDL_Renderer *renderer, std::map<char, std::string> &piecesImages) {
     Square* board[8][8];
-    //test piece icons
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -21,7 +20,7 @@ void RenderBoard(char boardState[8][8], SDL_Window *window, SDL_Renderer *render
                 color = white;
             else
                 color = black;
-
+            
 
             if (boardState[i][j] == '0') board[i][j] = new Square(100, color, 100 * i, 100 * j, window, renderer);
             else board[i][j] = new Square(boardState[i][j], 100, color, 100 * i, 100 * j, window, renderer, piecesImages);
@@ -62,7 +61,7 @@ int main(int argc, char** argv) {
         {'0', '0', '0', '0', '0', '0', '0', '0'},
         {'0', '0', '0', '0', '0', '0', '0', '0'},
         {'0', '0', '0', '0', '0', '0', '0', '0'},
-        {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+        {'P', 'P', 'B', 'P', 'P', 'P', 'P', 'P'},
         {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
     };
 
@@ -92,6 +91,25 @@ int main(int argc, char** argv) {
             switch(event.type) {
                 case SDL_QUIT:
                     running = false;
+                    break;
+
+
+                case SDL_MOUSEBUTTONDOWN:
+                    if (event.button.button == SDL_BUTTON_LEFT) {
+                        int mouseX, mouseY;
+
+                        SDL_GetMouseState(&mouseX, &mouseY);
+                        int row = mouseY / 100;
+                        int collumn = mouseX / 100;
+
+                        if (boardState[row][collumn] != '0') {
+                            std::cout << boardState[row][collumn] << std::endl;
+                        }
+                    }
+
+                    else if (event.button.button == SDL_BUTTON_RIGHT)
+                        RenderBoard(boardState, window, renderer, piecesImages);
+
                     break;
 
                 default:
