@@ -8,14 +8,14 @@ Square::Square(int width, SDL_Color color, int x, int y, SDL_Window *window, SDL
 
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
-    SDL_Rect rectangle { x, y, width, width };
+    SDL_Rect rectangle { y, x, width, width };
 
     SDL_RenderFillRect(renderer, &rectangle);
 }
 
 
 
-Square::Square(char piece, int width, SDL_Color color, int x, int y, SDL_Window *window, SDL_Renderer *renderer, std::map<char, std::string> &piecesImages) : 
+Square::Square(char piece, int width, SDL_Color color, int x, int y, SDL_Window *window, SDL_Renderer *renderer) : 
     piece(piece), width(width), color(color), x(x), y(y) {
 
 
@@ -25,7 +25,7 @@ Square::Square(char piece, int width, SDL_Color color, int x, int y, SDL_Window 
 
 
 
-    SDL_Rect rectangle { x, y, width, width };
+    SDL_Rect rectangle { y, x, width, width };
     SDL_Texture* image = IMG_LoadTexture(renderer, imageURL);
 
 
