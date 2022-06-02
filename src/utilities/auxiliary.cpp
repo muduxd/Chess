@@ -373,22 +373,22 @@ void RenderState(int gameState, SDL_Renderer *renderer) {
 
     if (gameState == 1) {
         SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a);
-        SDL_Rect rectangle1 { 850, 100, 100, 50 };
+        SDL_Rect rectangle1 { 850, 100, 100, 30 };
         SDL_RenderFillRect(renderer, &rectangle1);
 
 
         SDL_SetRenderDrawColor(renderer, grey.r, grey.g, grey.b, grey.a);
-        SDL_Rect rectangle2 { 850, 700, 100, 50 };
+        SDL_Rect rectangle2 { 850, 700, 100, 30 };
         SDL_RenderFillRect(renderer, &rectangle2);
     }
 
     if (gameState == 2) {
         SDL_SetRenderDrawColor(renderer, grey.r, grey.g, grey.b, grey.a);
-        SDL_Rect rectangle1 { 850, 100, 100, 50 };
+        SDL_Rect rectangle1 { 850, 100, 100, 30 };
         SDL_RenderFillRect(renderer, &rectangle1);
 
         SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a);
-        SDL_Rect rectangle2 { 850, 700, 100, 50 };
+        SDL_Rect rectangle2 { 850, 700, 100, 30 };
         SDL_RenderFillRect(renderer, &rectangle2);
     }
 }
