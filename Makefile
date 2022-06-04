@@ -1,15 +1,18 @@
 CC = g++
+LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lsdl2_image -lsdl2_mixer 
 
-BIN = bin
-INCLUDE = include 
-LIB = lib
-SOURCE = src/classes/square
-UTILS = src/utilities
+
+INCLUDE = -Iinclude 
+LIB = -Llib
+CLASSES = -Isrc/classes/square -Isrc/classes/text
+UTILS = -Isrc/utilities
+
 
 TARGET = bin/main.exe
 ENTRY = main.cpp
+AUXILIARY = src/classes/square/Square.cpp src/classes/text/Text.cpp src/utilities/auxiliary.cpp src/utilities/colors.cpp
 
 
 all:
-	$(CC) -I$(INCLUDE) -L$(LIB) -I$(SOURCE) -Isrc/classes/text -I$(UTILS) -o $(TARGET) $(ENTRY) src/classes/square/Square.cpp src/classes/text/Text.cpp src/utilities/auxiliary.cpp src/utilities/colors.cpp -lmingw32 -lSDL2main -lSDL2 -lsdl2_image -lsdl2_mixer -lsdl2
+	$(CC) $(INCLUDE) $(LIB) $(CLASSES) $(UTILS) -o $(TARGET) $(ENTRY) $(AUXILIARY) $(LINKER_FLAGS)
 	./$(TARGET)

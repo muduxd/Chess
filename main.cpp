@@ -11,7 +11,7 @@
 
 
 
-int main(int argc, char** argv) {
+int main(int argc, char *argv[]) {
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
@@ -81,16 +81,7 @@ int main(int argc, char** argv) {
                         SDL_GetMouseState(&mouseX, &mouseY);
 
                         if (restartButton.isClicked(mouseX, mouseY)) {
-                            char boardState[8][8] = {
-                                {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                                {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                                {'0', '0', '0', '0', '0', '0', '0', '0'},
-                                {'0', '0', '0', '0', '0', '0', '0', '0'},
-                                {'0', '0', '0', '0', '0', '0', '0', '0'},
-                                {'0', '0', '0', '0', '0', '0', '0', '0'},
-                                {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                                {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                            };
+                            overrideValues(boardState);
 
                             gameState = 1;
                             selected = false;

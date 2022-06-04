@@ -13,3 +13,4 @@ bool kingcheck(int gameState, char boardCopy[8][8]);
 bool legal(int firstRow, int firstCol, int secondRow, int secondCol, char boardState[8][8], int gameState);
 void RenderState(int gameState, SDL_Renderer *renderer);
 void RenderBoard(char boardState[8][8], SDL_Window *window, SDL_Renderer *renderer);
+void overrideValues(char boardState[8][8]);
