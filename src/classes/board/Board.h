@@ -48,6 +48,7 @@ class Board {
             {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
             {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
         };
+        char boardCopy[8][8];
         
     public:
         Board(SDL_Window *window, SDL_Renderer *renderer);
@@ -60,4 +61,6 @@ class Board {
         char getSelectedPiece();
         void playSound(Sound type);
         bool moveValid(int firstRow, int firstCol, int secondRow, int secondCol);
+        bool kingcheck();
+        void createCopy(int firstRow, int firstCol, int secondRow, int secondCol);
 };
