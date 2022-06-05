@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include <iostream>
+#include <SDL2/SDL_ttf.h>
+#include <string>
 
 
 class Text {
@@ -10,6 +11,7 @@ class Text {
         std::string text;
 
     public: 
+        Text();
         Text(std::string text, SDL_Color textColor, SDL_Color backgroundColor, int x, int y, int width, int height, SDL_Renderer *renderer);
         bool isClicked(int mouseX, int mouseY);
 };
