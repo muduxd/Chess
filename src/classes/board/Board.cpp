@@ -7,7 +7,14 @@ Board::Board(SDL_Window *window, SDL_Renderer *renderer) {
 
 
 void Board::Render(SDL_Window *window, SDL_Renderer *renderer) {
-    restartButton = Text("Restart", black, yellow, 820, 350, 160, 50, renderer);
+    restartButton = Text("Restart", white, black, 920, 380, 160, 50, renderer);
+
+    Text whitePlayer = Text("You", white, black, 900, 700, 100, 50, renderer);
+    Text whiteTurn = Text("", white, gameState == WHITE_MOVES ? grey : black, 1050, 700, 100, 50, renderer);
+
+    Text blackPlayer = Text(" AI ", white, black, 900, 50, 100, 50, renderer);
+    Text blackTurn = Text("", white, gameState == BLACK_MOVES ? grey : black, 1050, 50, 100, 50, renderer);
+
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -133,7 +140,7 @@ void Board::handleLeftClick(SDL_Window *window, SDL_Renderer *renderer) {
         isPieceSelected = false;
 
 
-        if (true) {
+        if (moveValid(before.row, before.collumn, row, collumn)) {
             if (boardState[row][collumn] == '0') 
                 playSound(MOVE);
             else 
@@ -145,9 +152,10 @@ void Board::handleLeftClick(SDL_Window *window, SDL_Renderer *renderer) {
 
             gameState = gameState == WHITE_MOVES ? BLACK_MOVES : WHITE_MOVES;
         }
-        else {
+        else 
             boardState[before.row][before.collumn] = before.piece;
-        }
+        
+        Render(window, renderer);
 
     }
     else if (boardState[row][collumn] != '0' && !isPieceSelected) {
@@ -160,12 +168,18 @@ void Board::handleLeftClick(SDL_Window *window, SDL_Renderer *renderer) {
         selectedPiece = boardState[row][collumn];
     }
 
-    Render(window, renderer);
 }
 
 
 void Board::handleRightClick(SDL_Window *window, SDL_Renderer *renderer) {
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
 
+    int row = mouseY / 100;
+    int collumn = mouseX / 100;
+
+    if (boardState[row][collumn] == '0') Square(100, blue, 100 * row, 100 * collumn, window, renderer);
+    else Square(boardState[row][collumn], 100, blue, 100 * row, 100 * collumn, window, renderer);
 }
 
 
@@ -210,4 +224,20 @@ void Board::playSound(Sound type) {
         default:
             break;
     }
+}
+
+bool Board::moveValid(int firstRow, int firstCol, int secondRow, int secondCol) {
+    if (
+        (boardState[firstRow][firstCol] == 'r' || boardState[firstRow][firstCol] == 'n' || 
+        boardState[firstRow][firstCol] == 'b' || boardState[firstRow][firstCol] == 'q' ||
+        boardState[firstRow][firstCol] == 'k' || boardState[firstRow][firstCol] == 'p') && (gameState == WHITE_MOVES)
+    )   return false;
+
+    if (
+        (boardState[firstRow][firstCol] == 'R' || boardState[firstRow][firstCol] == 'N' || 
+        boardState[firstRow][firstCol] == 'B' || boardState[firstRow][firstCol] == 'Q' ||
+        boardState[firstRow][firstCol] == 'K' || boardState[firstRow][firstCol] == 'P') && (gameState == BLACK_MOVES)
+    )   return false;
+
+    return true;
 }

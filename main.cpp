@@ -37,7 +37,9 @@ int main (int argc, char *argv[]) {
 
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
-
+            
+            //EVENT HANDLERS
+            
             switch (event.type) {
                 case SDL_QUIT:
                     running = false;
@@ -56,6 +58,8 @@ int main (int argc, char *argv[]) {
                     break;
             }
 
+
+            //HOVER EFFECT
 
             if (board.isSelected()) {
                 int mouseX, mouseY;

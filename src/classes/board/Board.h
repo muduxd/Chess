@@ -59,4 +59,5 @@ class Board {
         char getPosition(int row, int collumn);
         char getSelectedPiece();
         void playSound(Sound type);
+        bool moveValid(int firstRow, int firstCol, int secondRow, int secondCol);
 };
